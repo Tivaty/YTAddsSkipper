@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Adds Skipper",
+  "version": "1.0",
+  "description":"This is a chrome addon that detect adds in YT video and mute sound. Then it detect skip adds button and click.",
+  "permissions": ["activeTab"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
