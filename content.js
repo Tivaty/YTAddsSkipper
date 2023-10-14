@@ -1,4 +1,5 @@
 let appName = "YT_Adds_Skipper";
+let interval = 500;
 
 console.log(appName + 'Content script is running');
 
@@ -33,4 +34,4 @@ let checkExist = setInterval(function() {
 		   buttonClicked = false;
 	   }
    }
-}, 1000); // Kiểm tra mỗi 1000ms (1 giây)
+}, interval); // Kiểm tra mỗi 1000ms (1 giây)
