@@ -1,6 +1,6 @@
+let appName = "YT_Adds_Skipper";
 
-
-console.log('Content script is running');
+console.log(appName + 'Content script is running');
 
 let buttonClicked = false; // Biến để theo dõi xem nút đã được nhấn hay chưa
 
@@ -11,7 +11,7 @@ let checkExist = setInterval(function() {
       let muteButton = document.querySelector('.ytp-mute-button.ytp-button');
       if (muteButton) {
           
-          console.log("Adds detected and sound muted");
+          console.log(appName + "Adds detected and sound muted");
           buttonClicked = true; // Cập nhật trạng thái của nút
       }
       // Gửi tin nhắn đến background.js
@@ -22,9 +22,12 @@ let checkExist = setInterval(function() {
 	   let skipAddsElement = document.querySelector('.ytp-ad-skip-button.ytp-button');
 	   if(skipAddsElement){
 		  skipAddsElement.click();
+        console.log(appName + "Skiped adds");
 		  let muteButton = document.querySelector('.ytp-mute-button.ytp-button');
-		   muteButton.click();
-		   console.log("Skiped adds and unmute");
+        if(muteButton && muteButton.title === 'Unmute (m)'){
+            muteButton.click();
+            console.log(appName + "Unmute");
+        }
 		   // Gửi tin nhắn đến background.js
 			chrome.runtime.sendMessage({message: "ad_skipped"});
 		   buttonClicked = false;
