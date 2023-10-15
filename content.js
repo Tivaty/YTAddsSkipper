@@ -1,4 +1,4 @@
-let appName = "YT_Adds_Skipper";
+let appName = "YT_Adds_Skipper: ";
 let interval = 500;
 
 console.log(appName + 'Content script is running');
