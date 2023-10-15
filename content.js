@@ -10,8 +10,8 @@ let checkExist = setInterval(function() {
    let adElement = document.querySelector('.ytp-ad-text');
    if (adElement && !buttonClicked) { // Chỉ nhấn nút nếu quảng cáo xuất hiện và nút chưa được nhấn
       let muteButton = document.querySelector('.ytp-mute-button.ytp-button');
-      if (muteButton) {
-          
+      if (muteButton && muteButton.title === 'Mute (m)'){
+          muteButton.click();
           console.log(appName + "Adds detected and sound muted");
           buttonClicked = true; // Cập nhật trạng thái của nút
       }
