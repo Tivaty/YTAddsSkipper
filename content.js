@@ -16,7 +16,11 @@ let checkExist = setInterval(function() {
           buttonClicked = true; // Cập nhật trạng thái của nút
       }
       // Gửi tin nhắn đến background.js
-      chrome.runtime.sendMessage({message: "ad_detected"});
+      try{
+         chrome.runtime.sendMessage({message: "ad_detected"});
+      }catch{
+
+      }
    }
    
    if(buttonClicked){
@@ -27,12 +31,16 @@ let checkExist = setInterval(function() {
 		  let unmuteButton = document.querySelector(unmuteButtonElementClassName);
         if(unmuteButton && unmuteButton.title === unmuteButtonElementTitle){
             unmuteButton.click();
-            console.log(appName + "Unmute");
+            console.log(appName + "Unmute sound");
         }
-		   // Gửi tin nhắn đến background.js
-			chrome.runtime.sendMessage({message: "ad_skipped"});
-		   buttonClicked = false;
+        try{
+         // Gửi tin nhắn đến background.js
+         chrome.runtime.sendMessage({message: "ad_skipped"});
+        }catch{
+
+        }
 	   }
+      buttonClicked = false; 
    }
 }, interval); // Kiểm tra mỗi 1000ms (1 giây)
 
