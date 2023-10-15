@@ -7,10 +7,10 @@ let buttonClicked = false; // Biến để theo dõi xem nút đã được nh�
 
 // Kiểm tra sự tồn tại của phần tử mỗi 1 giây
 let checkExist = setInterval(function() {
-   let adElement = document.querySelector('.ytp-ad-text');
+   let adElement = document.querySelector(adElementClassName);
    if (adElement && !buttonClicked) { // Chỉ nhấn nút nếu quảng cáo xuất hiện và nút chưa được nhấn
-      let muteButton = document.querySelector('.ytp-mute-button.ytp-button');
-      if (muteButton && muteButton.title === 'Mute (m)'){
+      let muteButton = document.querySelector(muteButtonElementClassName);
+      if (muteButton && muteButton.title === muteButtonElementTitle){
           muteButton.click();
           console.log(appName + "Adds detected and sound muted");
           buttonClicked = true; // Cập nhật trạng thái của nút
@@ -20,13 +20,13 @@ let checkExist = setInterval(function() {
    }
    
    if(buttonClicked){
-	   let skipAddsElement = document.querySelector('.ytp-ad-skip-button.ytp-button');
+	   let skipAddsElement = document.querySelector(skipAddsButtonElementClassName);
 	   if(skipAddsElement){
 		  skipAddsElement.click();
         console.log(appName + "Skiped adds");
-		  let muteButton = document.querySelector('.ytp-mute-button.ytp-button');
-        if(muteButton && muteButton.title === 'Unmute (m)'){
-            muteButton.click();
+		  let unmuteButton = document.querySelector(unmuteButtonElementClassName);
+        if(unmuteButton && unmuteButton.title === unmuteButtonElementTitle){
+            unmuteButton.click();
             console.log(appName + "Unmute");
         }
 		   // Gửi tin nhắn đến background.js
@@ -35,3 +35,40 @@ let checkExist = setInterval(function() {
 	   }
    }
 }, interval); // Kiểm tra mỗi 1000ms (1 giây)
+
+
+/******************************************************************************* */
+
+
+/*
+--------Adds infor element----------
+<div class="ytp-ad-player-overlay-instream-info">
+<span class="ytp-ad-simple-ad-badge" id="simple-ad-badge:fy" style="">
+<div class="ytp-ad-text" id="simple-ad-badge:fz" style="">Sponsored 1 of 2 ·</div>
+</span>
+-----------------------
+*/
+const adElementClassName = '.ytp-ad-text';
+/*
+--------mute-button element----------
+<button class="ytp-mute-button ytp-button" aria-keyshortcuts="m" data-title-no-tooltip="Mute" aria-label="Mute keyboard shortcut m" title="Mute (m)">
+</button>
+-----------------------
+*/
+const muteButtonElementClassName = '.ytp-mute-button.ytp-button';
+const muteButtonElementTitle = 'Mute (m)';
+/*
+--------Unmute-button element----------
+<button class="ytp-mute-button ytp-button" aria-keyshortcuts="m" title="Unmute (m)" data-title-no-tooltip="Unmute"></button>
+-----------------------
+*/
+
+const unmuteButtonElementClassName = '.ytp-mute-button.ytp-button';
+const unmuteButtonElementTitle = 'Unmute (m)';
+
+/*
+--------SkipAdds-button element----------
+<button class="ytp-ad-skip-button ytp-button"><div class="ytp-ad-text ytp-ad-skip-button-text" id="ad-text:6" style="">Skip Ads
+-----------------------
+*/
+const skipAddsButtonElementClassName = '.ytp-ad-skip-button.ytp-button';
