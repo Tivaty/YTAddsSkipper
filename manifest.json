@@ -3,7 +3,7 @@
   "name": "YouTube Adds Skipper",
   "version": "1.0",
   "author": "Tivaty",
-  "description":"This is a chrome addon that detect adds in YT video and mute sound. Then it detect skip adds button and click.",
+  "description":"This is a chrome addon that detect adds in YT video and mute sound. Then it detects skip adds button and click.",
   "permissions": ["activeTab"],
   "background": {
     "service_worker": "background.js"

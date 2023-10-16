@@ -3,46 +3,64 @@ let interval = 500;
 
 console.log(appName + 'Content script is running');
 
-let buttonClicked = false; // Biến để theo dõi xem nút đã được nhấn hay chưa
+let muteButtonClicked = false; // Biến để theo dõi xem nút đã được nhấn hay chưa
+let addExist = false;
 
-// Kiểm tra sự tồn tại của phần tử mỗi 1 giây
-let checkExist = setInterval(function() {
-   let adElement = document.querySelector(adElementClassName);
-   if (adElement && !buttonClicked) { // Chỉ nhấn nút nếu quảng cáo xuất hiện và nút chưa được nhấn
-      let muteButton = document.querySelector(muteButtonElementClassName);
-      if (muteButton && muteButton.title === muteButtonElementTitle){
-          muteButton.click();
-          console.log(appName + "Adds detected and sound muted");
-          buttonClicked = true; // Cập nhật trạng thái của nút
-      }
-      // Gửi tin nhắn đến background.js
-      try{
-         chrome.runtime.sendMessage({message: "ad_detected"});
-      }catch{
+// Kiểm tra sự tồn tại của phần tử
+let checkExist = setInterval(function () {
+    let adElement = document.querySelector(adElementClassName);
+    if (adElement) { // Chỉ nhấn nút nếu quảng cáo xuất hiện và nút chưa được nhấn
+        if (!addExist) {
+            addExist = true;
+            console.log(appName + "Adds detected");
+            // Gửi tin nhắn đến background.js
 
-      }
-   }
-   
-   if(buttonClicked){
-	   let skipAddsElement = document.querySelector(skipAddsButtonElementClassName);
-	   if(skipAddsElement){
-		  skipAddsElement.click();
-        console.log(appName + "Skiped adds");
-		  let unmuteButton = document.querySelector(unmuteButtonElementClassName);
-        if(unmuteButton && unmuteButton.title === unmuteButtonElementTitle){
-            unmuteButton.click();
-            console.log(appName + "Unmute sound");
+            let muteButton = document.querySelector(muteButtonElementClassName);
+            if (muteButton && muteButton.title === muteButtonElementTitle) {
+                muteButton.click();
+                console.log(appName + "Muted sound");
+                muteButtonClicked = true; // Cập nhật trạng thái của nút
+            } else {
+                console.log(appName + "Can not find \"Muted sound\"");
+            }
+
+
+            try {
+                chrome.runtime.sendMessage({ message: "ad_detected" });
+            } catch {
+
+            }
         }
-        try{
-         // Gửi tin nhắn đến background.js
-         chrome.runtime.sendMessage({message: "ad_skipped"});
-        }catch{
-
+    } else {
+        addExist = true;
+        if (muteButtonClicked) {
+            let unmuteButton = document.querySelector(unmuteButtonElementClassName);
+            if (unmuteButton && unmuteButton.title === unmuteButtonElementTitle) {
+                unmuteButton.click();
+                console.log(appName + "Unmuted sound");
+            } else {
+                console.log(appName + "Can not find \"Unmuted sound\"");
+            }
+            muteButtonClicked = false;
         }
-	   }
-      buttonClicked = false; 
-   }
-}, interval); // Kiểm tra mỗi 1000ms (1 giây)
+    }
+
+    if (addExist) {
+        let skipAddsElement = document.querySelector(skipAddsButtonElementClassName);
+        if (skipAddsElement) {
+            skipAddsElement.click();
+            addExist = false;
+            console.log(appName + "Skiped adds");
+            try {
+                // Gửi tin nhắn đến background.js
+                chrome.runtime.sendMessage({ message: "ad_skipped" });
+            } catch {
+
+            }
+        }
+    }
+
+}, interval);
 
 
 /******************************************************************************* */
