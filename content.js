@@ -9,7 +9,7 @@ let addExist = false;
 // Kiểm tra sự tồn tại của phần tử
 let checkExist = setInterval(function () {
     let adElement = document.querySelector(adElementClassName);
-    if (adElement) { // Chỉ nhấn nút nếu quảng cáo xuất hiện và nút chưa được nhấn
+    if (adElement) {
         if (!addExist) {
             addExist = true;
             console.log(appName + "Adds detected");
@@ -65,16 +65,19 @@ let checkExist = setInterval(function () {
 
 /******************************************************************************* */
 
-
 /*
 --------Adds infor element----------
 <div class="ytp-ad-player-overlay-instream-info">
 <span class="ytp-ad-simple-ad-badge" id="simple-ad-badge:fy" style="">
 <div class="ytp-ad-text" id="simple-ad-badge:fz" style="">Sponsored 1 of 2 ·</div>
 </span>
+-----
+<span class="ytp-ad-simple-ad-badge" id="simple-ad-badge:u" style="">
+    <div class="ytp-ad-text" id="simple-ad-badge:v" style="">Sponsored ·
+</div></span>
 -----------------------
 */
-const adElementClassName = '.ytp-ad-text';
+const adElementClassName = '.ytp-ad-simple-ad-badge';
 /*
 --------mute-button element----------
 <button class="ytp-mute-button ytp-button" aria-keyshortcuts="m" data-title-no-tooltip="Mute" aria-label="Mute keyboard shortcut m" title="Mute (m)">
@@ -98,3 +101,5 @@ const unmuteButtonElementTitle = 'Unmute (m)';
 -----------------------
 */
 const skipAddsButtonElementClassName = '.ytp-ad-skip-button.ytp-button';
+
+
