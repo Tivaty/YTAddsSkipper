@@ -32,7 +32,7 @@ let checkExist = setInterval(function () {
             }
         }
     } else {
-        addExist = true;
+        addExist = false;
         if (muteButtonClicked) {
             let unmuteButton = document.querySelector(unmuteButtonElementClassName);
             if (unmuteButton && unmuteButton.title === unmuteButtonElementTitle) {
