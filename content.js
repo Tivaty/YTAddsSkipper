@@ -46,18 +46,21 @@ let checkExist = setInterval(function () {
     }
 
     if (addExist) {
-        let skipAddsElement = document.querySelector(skipAddsButtonElementClassName);
-        if (skipAddsElement) {
-            skipAddsElement.click();
-            addExist = false;
-            console.log(appName + "Skiped adds");
-            try {
-                // Gửi tin nhắn đến background.js
-                chrome.runtime.sendMessage({ message: "ad_skipped" });
-            } catch {
+        skipAddsButtonElementClassName.forEach(element => {
+            let skipAddsElement = document.querySelector(element);
+            if (skipAddsElement) {
+                skipAddsElement.click();
+                addExist = false;
+                console.log(appName + "Skiped adds");
+                try {
+                    // Gửi tin nhắn đến background.js
+                    chrome.runtime.sendMessage({ message: "ad_skipped" });
+                } catch {
 
+                }
             }
-        }
+        });
+
     }
 
 }, interval);
@@ -82,6 +85,7 @@ const adElementClassName = '.ytp-ad-simple-ad-badge';
 --------mute-button element----------
 <button class="ytp-mute-button ytp-button" aria-keyshortcuts="m" data-title-no-tooltip="Mute" aria-label="Mute keyboard shortcut m" title="Mute (m)">
 </button>
+
 -----------------------
 */
 const muteButtonElementClassName = '.ytp-mute-button.ytp-button';
@@ -99,7 +103,9 @@ const unmuteButtonElementTitle = 'Unmute (m)';
 --------SkipAdds-button element----------
 <button class="ytp-ad-skip-button ytp-button"><div class="ytp-ad-text ytp-ad-skip-button-text" id="ad-text:6" style="">Skip Ads
 -----------------------
+<button class="ytp-ad-skip-button-modern ytp-button"><div class="ytp-ad-text ytp-ad-skip-button-text-centered ytp-ad-skip-button-text" id="ad-text:31" style="">Skip</div><span class="ytp-ad-skip-button-icon-modern"><svg height="100%" viewBox="-6 -6 36 36" width="100%"><path d="M5,18l10-6L5,6V18L5,18z M19,6h-2v12h2V6z" fill="#fff"></path></svg></span></button>
+-----
 */
-const skipAddsButtonElementClassName = '.ytp-ad-skip-button.ytp-button';
+const skipAddsButtonElementClassName = ['.ytp-ad-skip-button.ytp-button', '.ytp-ad-skip-button-modern.ytp-button'];
 
 
