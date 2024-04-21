@@ -105,7 +105,8 @@ const unmuteButtonElementTitle = 'Unmute (m)';
 -----------------------
 <button class="ytp-ad-skip-button-modern ytp-button"><div class="ytp-ad-text ytp-ad-skip-button-text-centered ytp-ad-skip-button-text" id="ad-text:31" style="">Skip</div><span class="ytp-ad-skip-button-icon-modern"><svg height="100%" viewBox="-6 -6 36 36" width="100%"><path d="M5,18l10-6L5,6V18L5,18z M19,6h-2v12h2V6z" fill="#fff"></path></svg></span></button>
 -----
+<button class="ytp-skip-ad-button" id="skip-button:5e" style="opacity: 0.5;"><div class="ytp-skip-ad-button__text">Skip</div><span class="ytp-skip-ad-button__icon"><svg height="100%" viewBox="-6 -6 36 36" width="100%"><path d="M5,18l10-6L5,6V18L5,18z M19,6h-2v12h2V6z" fill="#fff"></path></svg></span></button>
 */
-const skipAddsButtonElementClassName = ['.ytp-ad-skip-button.ytp-button', '.ytp-ad-skip-button-modern.ytp-button'];
+const skipAddsButtonElementClassName = ['.ytp-ad-skip-button.ytp-button', '.ytp-ad-skip-button-modern.ytp-button', '.ytp-skip-ad-button'];
 
 
